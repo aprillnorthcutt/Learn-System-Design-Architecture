@@ -11,7 +11,7 @@ Each section includes a short explanation, visual diagram, and key trade-offs.
 
 Choosing the right data store for performance, scalability, and cost.
 
-![Storage Diagram](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/storage.png?raw=true)
+![Storage Diagram](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/storage.png?raw=true) <br>
 *Figure 1 – Data storage strategies and types (SQL, NoSQL, Blob).*
 
 **Key ideas**
