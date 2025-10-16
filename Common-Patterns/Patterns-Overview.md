@@ -25,7 +25,7 @@ Choosing the right data store for performance, scalability, and cost.
 
 Splitting data logically or physically to improve scalability and fault isolation.
 
-![Partitioning & Sharding Diagram](images/partitioning-sharding.png)
+![Partitioning & Sharding](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/partitioning-sharding.png?raw=true) <br>
 *Figure 2 – Logical vs physical data distribution.*
 
 **Key ideas**
@@ -39,7 +39,7 @@ Splitting data logically or physically to improve scalability and fault isolatio
 
 Ensuring availability and durability through duplication.
 
-![Redundancy & Replication Diagram](images/redundancy-replication.png)
+![Redundancy & Replication](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/redundancy-replication.png?raw=true) <br>
 *Figure 3 – Replication and failover patterns.*
 
 **Key ideas**
@@ -53,7 +53,7 @@ Ensuring availability and durability through duplication.
 
 Distribute user requests evenly across multiple backend servers.
 
-![Load Balancing Diagram](images/load-balancing.png)
+![Load Balancing](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/load-balancing.png?raw=true) <br>
 *Figure 4 – Round Robin, Least Connections, and IP Hash strategies.*
 
 **Key ideas**
@@ -67,7 +67,7 @@ Distribute user requests evenly across multiple backend servers.
 
 Store frequently accessed data close to users to reduce latency.
 
-![Caching Diagram](images/caching.png)
+![Caching](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/caching.png?raw=true) <br>
 *Figure 5 – Caching layers and eviction strategies.*
 
 **Key ideas**
@@ -81,7 +81,7 @@ Store frequently accessed data close to users to reduce latency.
 
 Serve static content from edge locations near users.
 
-![CDN Diagram](images/cdn.png)
+![CDN](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/cdn.png?raw=true) <br>
 *Figure 6 – Edge delivery and origin fallback.*
 
 **Key ideas**
@@ -95,7 +95,7 @@ Serve static content from edge locations near users.
 
 Protect systems from abuse and traffic spikes.
 
-![Rate Limiting Diagram](images/rate-limiting.png)
+![Rate Limiting](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/rate-limiting.png?raw=true) <br>
 *Figure 7 – Token bucket algorithm controlling request flow.*
 
 **Key ideas**
@@ -109,7 +109,7 @@ Protect systems from abuse and traffic spikes.
 
 Handle background work off the main thread for better responsiveness.
 
-![Async Processing Diagram](images/async-processing.png)
+![Async Processing](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/async-processing.png?raw=true) <br>
 *Figure 8 – Service → Queue → Workers flow.*
 
 **Key ideas**
@@ -124,7 +124,7 @@ Handle background work off the main thread for better responsiveness.
 A distributed system cannot simultaneously guarantee all three:  
 **Consistency, Availability, Partition tolerance.**
 
-![CAP Theorem Diagram](images/cap-theorem.png)
+![CAP Theorem](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/cap-theorem.png?raw=true) <br>
 *Figure 9 – CAP trade-offs (CP vs AP systems).*
 
 **Key ideas**
@@ -138,7 +138,7 @@ A distributed system cannot simultaneously guarantee all three:
 
 Extends CAP — when no partition occurs, systems trade **Latency** vs **Consistency**.
 
-![PACELC Theorem Diagram](images/pacelc.png)
+![PACELC Theorem](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/pacelc.png?raw=true) <br>
 *Figure 10 – Latency vs Consistency under normal conditions.*
 
 **Key ideas**
@@ -149,6 +149,9 @@ Extends CAP — when no partition occurs, systems trade **Latency** vs **Consist
 ---
 
 ## 📊 Functional vs Non-Functional Requirements
+
+![Functional vs Non-Functional Requirements](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/func-nonfunc.png?raw=true) <br>
+*Figure 10 – Latency vs Consistency under normal conditions.*
 
 | Type | Examples |
 |------|-----------|
