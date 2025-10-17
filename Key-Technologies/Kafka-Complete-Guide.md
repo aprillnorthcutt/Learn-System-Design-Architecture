@@ -20,8 +20,6 @@
 
 > 🎯 *Mental Model:* Kafka is like a durable postal system for data — producers write messages, brokers deliver them, and consumers pick them up when ready.
 
-![Kafka Architecture](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/kafka-architecture.png)
-
 ```mermaid
 flowchart LR
   subgraph Cluster
@@ -56,8 +54,6 @@ flowchart LR
 
 > ⚙️ *Goal:* Tune Kafka between durability 🔒, performance ⚡, and availability 🌍.
 
-![Kafka Control Knobs](../images/kafka-replication.png)
-
 ```mermaid
 flowchart LR
   P1["Producer 1"] --> T1["Topic A<br>(Partition 0–2)"]
@@ -87,7 +83,6 @@ flowchart LR
 
 > 🧠 *Question:* What’s safer — sending fast or never losing data? Kafka lets you choose.
 
-![Kafka Guarantees](../images/kafka-guarantees.png)
 
 | Guarantee         | Behavior               | Use When           |
 | ----------------- | ---------------------- | ------------------ |
@@ -115,8 +110,6 @@ sequenceDiagram
 ## 💾 Transactions & Storage Layout
 
 > 🧭 *Goal:* Understand how Kafka achieves atomicity — all or nothing.
-
-![Kafka Transactions](../images/kafka-transactions.png)
 
 ```mermaid
 sequenceDiagram
@@ -149,8 +142,6 @@ sequenceDiagram
 ## 🚨 Failures, Retries & DLQ Handling
 
 > 💥 *Goal:* Handle retries safely and isolate bad data.
-
-![Kafka Retries](../images/kafka-retries.png)
 
 ```mermaid
 flowchart LR
