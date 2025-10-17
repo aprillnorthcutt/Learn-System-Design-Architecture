@@ -217,16 +217,21 @@ sequenceDiagram
 | **Idempotent Processing** | Deduplicate by key or event ID         | Prevents double effects during retries |
 | **Tracing**               | Include `correlationId`                | Makes debugging across retries easier  |
 
+
 💡 Quick Mental Model
-
-Think of retries as ramps and the DLQ as a parking lot — messages keep climbing until they can’t, then park safely for inspection
-
+> Think of retries as ramps and the DLQ as a parking lot — messages keep climbing until they can’t, then park safely for inspection
+---
 > ⚠️ *Watch out:* Poison messages can block partitions — isolate with tiered retries. <br>
 > 💡 *Tip:* Add headers like `errorType`, `attempt`, `stacktrace` for DLQ analytics.
 
+<br>
+<br>
+
 [⬆️ Back to Top](#kafka-complete-guide)
 
+
 ---
+
 
 ## 🧠 Operational Tips & Monitoring
 
@@ -239,7 +244,7 @@ Think of retries as ramps and the DLQ as a parking lot — messages keep climbin
 | Broker       | `under-replicated-partitions` | Detect instability         |
 | Transactions | `txn-abort-rate`              | Reveal coordination issues |
 
-> 💡 *Tip:* Monitor **Consumer Lag vs LSO** — if it widens, consumers are behind commits.
+> 💡 *Tip:* Monitor **Consumer Lag vs LSO** — if it widens, consumers are behind commits. <br>
 > ⚙️ *Pro Move:* Auto-heal stuck consumers by rebalancing groups on lag threshold.
 
 [⬆️ Back to Top](#kafka-complete-guide)
@@ -258,7 +263,7 @@ Think of retries as ramps and the DLQ as a parking lot — messages keep climbin
 | Debugging lag  | Check consumer offsets              | Look for rebalances                 |
 | Retry strategy | Tiered topics                       | Avoid partition blocking            |
 
-> 💡 *Tip:* Kafka doesn’t lose data — you just have to tell it how patient to be.
+> 💡 *Tip:* Kafka doesn’t lose data — you just have to tell it how patient to be. <br>
 > 🧩 *Mnemonic:* “Acks, Replicas, Transactions = ART of durability.”
 
 [⬆️ Back to Top](#kafka-complete-guide)
