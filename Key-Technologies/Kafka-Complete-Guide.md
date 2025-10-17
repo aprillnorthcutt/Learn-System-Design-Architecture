@@ -1,8 +1,8 @@
-# ⚙️ Kafka Complete Guide
+# Kafka Complete Guide
 
 *A visual, beginner-friendly guide to how Kafka handles data flow, reliability, and recovery — designed for ADHD brains.*
 
----
+--- 
 
 ## 📑 Table of Contents
 
@@ -48,7 +48,7 @@ flowchart LR
 
 > 💡 *Tip:* Kafka = “Google Drive for events.” Upload (produce) → Store → Download (consume).
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -76,10 +76,10 @@ flowchart LR
 | **min.insync.replicas ↑** | 2+                     | Guarantees consistency | May reject writes   |
 | **acks=all**              | Waits for all replicas | Strong durability      | Higher latency      |
 
-> 💡 *Tip:* Use `acks=all` + `min.insync.replicas=2` for production safety.
+> 💡 *Tip:* Use `acks=all` + `min.insync.replicas=2` for production safety. <br>
 > ⚠️ *Watch out:* Don’t over-tighten these in dev — you’ll slow yourself down.
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -108,7 +108,7 @@ sequenceDiagram
 > 💡 *Tip:* Start with *at-least-once* and dedupe by key.
 > ⚠️ *Watch out:* Exactly-once needs `enable.idempotence=true` and transactions.
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -139,10 +139,10 @@ sequenceDiagram
 | **HW / LEO**      | High Watermark / Replication point | Durability fence    |
 | **Commit Marker** | Control record for visibility      | Checkmark at end    |
 
-> 💡 *Tip:* HW ≠ visible — visibility controlled by LSO.
+> 💡 *Tip:* HW ≠ visible — visibility controlled by LSO. <br>
 > ⚠️ *Watch out:* Long-running transactions block consumers until commit.
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -176,7 +176,7 @@ flowchart LR
 > ⚠️ *Watch out:* Poison messages can block partitions — isolate with tiered retries.
 > 💡 *Tip:* Add headers like `errorType`, `attempt`, `stacktrace` for DLQ analytics.
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -194,7 +194,7 @@ flowchart LR
 > 💡 *Tip:* Monitor **Consumer Lag vs LSO** — if it widens, consumers are behind commits.
 > ⚙️ *Pro Move:* Auto-heal stuck consumers by rebalancing groups on lag threshold.
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -213,4 +213,4 @@ flowchart LR
 > 💡 *Tip:* Kafka doesn’t lose data — you just have to tell it how patient to be.
 > 🧩 *Mnemonic:* “Acks, Replicas, Transactions = ART of durability.”
 
-[⬆️ Back to Top](#-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
