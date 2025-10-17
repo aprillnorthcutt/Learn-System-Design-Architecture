@@ -12,7 +12,7 @@
 4. [💾 Transactions & Storage Layout](#transactions--storage-layout)
 5. [🚨 Failures, Retries & DLQ Handling](#failures-retries--dlq-handling)
 6. [🧠 Operational Tips & Monitoring](#operational-tips--monitoring)
-7. [📘 Quick Reference Cheat Sheet](#quick-reference-cheat-sheet)
+7. [📘 Quick Reference Cheat Sheet](#-quick-reference-cheat-sheet)
 
 ---
 
