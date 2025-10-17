@@ -6,7 +6,7 @@
 
 ## 📑 Table of Contents
 
-1. [🧩 Core Concepts & Architecture](#core-concepts--architecture)
+1. [🧩 Core Concepts & Architecture](#core-concepts--architecture)#-core-concepts--architecture
 2. [🎛️ Control Knobs & Configuration](#control-knobs--configuration)
 3. [🔒 Messaging Guarantees](#messaging-guarantees)
 4. [💾 Transactions & Storage Layout](#transactions--storage-layout)
