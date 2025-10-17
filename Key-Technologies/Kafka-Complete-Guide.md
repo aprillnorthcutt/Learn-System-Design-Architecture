@@ -20,7 +20,7 @@
 
 > 🎯 *Mental Model:* Kafka is like a durable postal system for data — producers write messages, brokers deliver them, and consumers pick them up when ready.
 
-![Kafka Architecture](/images/kafka-architecture.png)
+![Kafka Architecture](https://github.com/aprillnorthcutt/Learn-System-Design-Architecture/blob/main/images/kafka-architecture.png)
 
 ```mermaid
 flowchart LR
