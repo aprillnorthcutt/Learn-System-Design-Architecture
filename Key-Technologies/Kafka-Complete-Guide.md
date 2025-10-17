@@ -6,13 +6,13 @@
 
 ## 📑 Table of Contents
 
-1. [🧩 Core Concepts & Architecture](#🧩-core-concepts--architecture)
-2. [🎛️ Control Knobs & Configuration](#🎛️-control-knobs--configuration)
-3. [🔒 Messaging Guarantees](#🔒-messaging-guarantees)
-4. [💾 Transactions & Storage Layout](#💾-transactions--storage-layout)
-5. [🚨 Failures, Retries & DLQ Handling](#🚨-failures-retries--dlq-handling)
-6. [🧠 Operational Tips & Monitoring](#🧠-operational-tips--monitoring)
-7. [📘 Quick Reference Cheat Sheet](#📘-quick-reference-cheat-sheet)
+1. [🧩 Core Concepts & Architecture](#core-concepts--architecture)
+2. [🎛️ Control Knobs & Configuration](#control-knobs--configuration)
+3. [🔒 Messaging Guarantees](#messaging-guarantees)
+4. [💾 Transactions & Storage Layout](#transactions--storage-layout)
+5. [🚨 Failures, Retries & DLQ Handling](#failures-retries--dlq-handling)
+6. [🧠 Operational Tips & Monitoring](#operational-tips--monitoring)
+7. [📘 Quick Reference Cheat Sheet](#quick-reference-cheat-sheet)
 
 ---
 
@@ -48,7 +48,7 @@ flowchart LR
 
 > 💡 *Tip:* Kafka = “Google Drive for events.” Upload (produce) → Store → Download (consume).
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -79,7 +79,7 @@ flowchart LR
 > 💡 *Tip:* Use `acks=all` + `min.insync.replicas=2` for production safety.
 > ⚠️ *Watch out:* Don’t over-tighten these in dev — you’ll slow yourself down.
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -108,7 +108,7 @@ sequenceDiagram
 > 💡 *Tip:* Start with *at-least-once* and dedupe by key.
 > ⚠️ *Watch out:* Exactly-once needs `enable.idempotence=true` and transactions.
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -142,7 +142,7 @@ sequenceDiagram
 > 💡 *Tip:* HW ≠ visible — visibility controlled by LSO.
 > ⚠️ *Watch out:* Long-running transactions block consumers until commit.
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -176,7 +176,7 @@ flowchart LR
 > ⚠️ *Watch out:* Poison messages can block partitions — isolate with tiered retries.
 > 💡 *Tip:* Add headers like `errorType`, `attempt`, `stacktrace` for DLQ analytics.
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -194,7 +194,7 @@ flowchart LR
 > 💡 *Tip:* Monitor **Consumer Lag vs LSO** — if it widens, consumers are behind commits.
 > ⚙️ *Pro Move:* Auto-heal stuck consumers by rebalancing groups on lag threshold.
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
 
 ---
 
@@ -213,4 +213,4 @@ flowchart LR
 > 💡 *Tip:* Kafka doesn’t lose data — you just have to tell it how patient to be.
 > 🧩 *Mnemonic:* “Acks, Replicas, Transactions = ART of durability.”
 
-[⬆️ Back to Top](#⚙️-kafka-complete-guide)
+[⬆️ Back to Top](#kafka-complete-guide)
