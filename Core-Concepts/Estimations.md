@@ -1,6 +1,6 @@
 # 📐 System Design Estimation Sheet (Back-of-the-Envelope)
 
-> Use this README to estimate **latency, throughput, concurrency, threads, and bandwidth** — quickly, clearly, and ADHD-friendly.
+> Use this README to estimate **latency, throughput, concurrency, threads, and bandwidth** — quickly, and clearlyy.
 
 ---
 
