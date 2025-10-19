@@ -1,36 +1,130 @@
 
+# 🌍 i18n System Design — Final Architecture (Meta Interview Ready)
+
+This document captures the **final, interview-grade architecture** for the internationalization (i18n) system design question, as asked at Meta and similar companies.  
+It separates **user-facing reads (🟢)** from **backend update propagation (🔵)** to ensure global scalability, consistency, and sub-50ms latency.
+
+---
+
+## 🧭 System Overview
+
 ```mermaid
-graph TD
-  U[Client] -->|"GET /i18n"| CDN[CDN]
-  CDN -->|miss| API[API GW]
-  API -->|MGET| R[Redis]
-  R -->|miss| DB[PG]
-  DB --> CDC[CDC]
-  CDC --> K[Kafka]
-  K --> RU[R-Upd]
-  K --> CI[CDN-Purge]
-  RU -->|set| R
-  CI -->|purge| CDN
-  R -->|vals+ver| API
-  API -->|bundle| CDN
-  CDN -->|hit| U
-  T[TransUI] -->|upsert| API
+graph LR
+  %% ==== READ PATH (Client-facing, GREEN) ====
+  A[Client]
+  B[CDN Edge]
+  C[API Gateway]
+  D[Redis Cache]
+  E[Postgres DB]
 
+  %% Read flow (only green)
+  A -->|GET /i18n| B
+  B -->|cache miss| C
+  C -->|MGET locale_keys| D
+  D -->|cache miss| E
+  E -->|query result| D
+  D -->|values and version| C
+  C -->|bundle| B
+  B -->|localized response| A
 
+  %% ==== UPDATE PATH (Backend-only, BLUE) ====
+  T[Translator UI]
+  F[CDC Debezium]
+  G[Kafka translation_events]
+  H[Redis Updater]
+  X[CDN Control]
+
+  %% Update flow - never touches Client or CDN Edge
+  T -->|POST /translations| C
+  C -->|write translation| E
+  E -->|emit change| F
+  F -->|publish event| G
+  G -->|update cache| H
+  H -->|refresh Redis| D
+  G -->|purge request| X
+
+  %% ==== LINK COLORS ====
+  %% Read Path - green (edges 0..7)
+  linkStyle 0 stroke:#228B22,stroke-width:2px;
+  linkStyle 1 stroke:#228B22,stroke-width:2px;
+  linkStyle 2 stroke:#228B22,stroke-width:2px;
+  linkStyle 3 stroke:#228B22,stroke-width:2px;
+  linkStyle 4 stroke:#228B22,stroke-width:2px;
+  linkStyle 5 stroke:#228B22,stroke-width:2px;
+  linkStyle 6 stroke:#228B22,stroke-width:2px;
+  linkStyle 7 stroke:#228B22,stroke-width:2px;
+
+  %% Update Path - blue (edges 8..14)
+  linkStyle 8 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 9 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 10 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 11 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 12 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 13 stroke:#1E90FF,stroke-width:2px;
+  linkStyle 14 stroke:#1E90FF,stroke-width:2px;
 ```
 
 ---
-Legend
-- Client (U): Web/iOS/Android app 
-- CDN: Edge cache for bundles
-- API GW (API): Localization API gateway
-- Redis (R): Regional cache (i18n:{locale}:{key})
-- PG (DB): Postgres source of truth (versioned)
-- CDC: Change Data Capture (Debezium)
-- Kafka (K): translation_events topic
-- R-Upd (RU): Redis updater consumer
-- CDN-Purge (CI): Edge invalidation worker
-- TransUI (T): Translator/PM authoring tool
+
+## 🟢 Read Path — User-Facing Flow
+
+**Purpose:** Deliver localized UI strings in <50ms.
+
+1. Client requests `/i18n?locale=fr&surface=home`.
+2. CDN Edge returns cached bundle if present.
+3. On miss → API Gateway queries Redis.
+4. Redis returns hot keys; if cache miss → Postgres lookup.
+5. Postgres result rehydrates Redis and returns to client via CDN.
+6. Clients see atomic, versioned bundles — never mixed locales.
+
+**Tech stack:** CDN (Cloudflare/Akamai), Redis Cluster, Postgres, API Gateway.
+
+---
+
+## 🔵 Update Path — Backend Propagation
+
+**Purpose:** Refresh caches and CDN bundles after translation edits.
+
+1. Translator UI posts a new translation via `/translations`.
+2. API writes to Postgres (versioned translation table).
+3. CDC (Debezium) detects change → sends to Kafka.
+4. Kafka publishes `translation_changed` events.
+5. Redis Updater consumes event → refreshes keys.
+6. CDN Control API invalidates stale edge bundles.
+
+**Important:** This path **never touches the client** — it prepares data for future reads.
+
+---
+
+## 🧩 Key Interview Insights
+
+| Principle | Explanation |
+|------------|-------------|
+| **Separation of concerns** | Green path = reads; Blue path = backend-only updates. |
+| **Low latency** | CDN + Redis = sub-50ms p95 response. |
+| **Event-driven freshness** | CDC + Kafka keeps caches and CDN updated in near-real-time. |
+| **Atomic consistency** | Versioned bundles prevent mixed-language UI. |
+| **No client fan-out** | Users only get updated data on their next request. |
+
+---
+
+## 🗣️ How to Explain This at Meta
+
+> “We decouple translation delivery from translation updates.  
+> The read path serves localized bundles via CDN and Redis for <50ms p95 latency.  
+> The update path runs asynchronously — when translators update text, CDC and Kafka propagate changes to Redis and CDN, ensuring global consistency without touching clients directly.  
+> This design scales linearly, prevents fan-out, and guarantees atomic locale bundles per surface.”
+
+---
+
+🟢 **Green = Serves user requests**  
+🔵 **Blue = Propagates updates (no client contact)**
+
+---
+
+**Author:** April Northcutt  
+**Prepared for:** Meta / FAANG System Design Interview Practice  
+**Filename:** `README_i18n_MetaReady.md`
 
 ---
 
