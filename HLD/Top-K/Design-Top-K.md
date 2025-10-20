@@ -72,15 +72,16 @@ GET /top-k?window={hour|day|month|all}&k={1..1000}
 
 ```mermaid
 flowchart TD
-  U[Clients (Web/API)] -->|GET /top-k| API[Top-K API (stateless)]
-  API -->|GET| REDIS[(Redis Cluster)]
-  API -->|fallback| REPL[(Postgres Read Replica)]
-  EVT[Edge Apps emit ViewEvent] --> KAFKA[(Kafka Topic)]
-  KAFKA --> SP[Stream Processor (Flink/Kafka Streams)]
-  SP -->|upsert| PG[(Postgres Shards)]
-  SP -->|window seal| WARM[Cache Warmer Trigger]
+  U["Clients (Web/API)"] -->|GET /top-k| API["Top-K API (stateless)"]
+  API -->|Read| REDIS[(Redis Cluster)]
+  API -->|Fallback| REPL[(Postgres Read Replica)]
+  EVT["Edge Apps emit ViewEvent"] --> KAFKA[(Kafka Topic: view_events)]
+  KAFKA --> SP["Stream Processor <br> (Flink / Kafka Streams)"]
+  SP -->|Upsert counts| PG[(Postgres Shards)]
+  SP -->|Window seal| WARM["Cache Warmer Trigger"]
   WARM -->|SET Top-K keys| REDIS
   SP --> LAKE[(Data Lake: Parquet)]
+
 ```
 
 ---
