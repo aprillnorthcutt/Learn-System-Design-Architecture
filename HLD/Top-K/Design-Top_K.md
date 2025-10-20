@@ -1,5 +1,11 @@
 # 🧠 Deep-Dive — Top-K Views Architecture (Kafka · Flink · Postgres · Redis)
+ ---
 
+ ![Architecture Diagram](https://raw.githubusercontent.com/aprillnorthcutt/Learn-System-Design-Architecture/main/images/top-k.png)
+
+ ---
+
+ 
 > **Goal:** Find the most-viewed videos quickly (Top-K) with accurate counts, even when millions of people are watching at once.
 
 ----
